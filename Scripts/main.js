@@ -6,14 +6,13 @@ $('#myStudyGroupsDiv').hide();
 $('#helpDiv').hide();
 
 $('#submitCreateGroup').click(function(e) {
-    alert("wtf");
-    email = $('#email').val();  
-    name = $('#fullname').val();  
-    date = $('#date').val();  
-    time = $('#time').val();  
-    myClasses.push({email: email, name: name, date: date, time: time});
+    var email = $('#email').val();  
+    var location = $('#location').val();  
+    var name = $('#fullname').val();  
+    var date = $('#date').val();  
+    var time = $('#time').val();  
+    myClasses.push({location: location, email: email, name: name, date: date, time: time});
     $('#createGroupModal').modal('toggle');
-
 });
 
 var myClasses = []; 
@@ -32,9 +31,8 @@ $('#sidenavbar li').click(function(e) {
       self.siblings().removeClass('active');
 
       if (self.attr('id') == "myStudyGroups"){
-        $('.myStudyGroups').html('5');
+          populateMyGroups();
       }
-
 
       divId = (self.attr('id') + "Div");
       div = $("#"+divId);
@@ -97,3 +95,19 @@ jQuery.fn.extend({
   }
 });
 
+var populateMyGroups = function() {
+    var html = "";
+
+    var attendButtons = "<div class='btn-group'><button id='attending' class='btn btn-success'>Attending</button><button id='notAttending' class='btn btn-error'>Not Attending</button></div>";
+
+    for (var i in myClasses){
+        html = html + "<div style='position:relative;left:130px;top:259px' class='modal'><div class='modal-header'><h2>omg how do we do this</h2></div><div class='modal-body'><p>Location: " + myClasses[i].location +"</p><p>Date: " + myClasses[i].date+ "</p><p>Time: "+myClasses[i].time+ "</p><p>Organizer: <a href=mailto:" + myClasses[i].email + ">"+myClasses[i].name+"</a></p>"+attendButtons+"</div>";
+    }
+
+    $('.myStudyGroups').append(html);
+
+    $('#attending').click();
+    $('#notAttending').click();
+    
+        
+}
