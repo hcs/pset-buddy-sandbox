@@ -1,13 +1,11 @@
-currentDiv = $('#searchDiv');
+var currentDiv = $('#searchDiv');
 $('#findGroupDiv').hide();
 $('#createGroupDiv').hide();
 $('#searchResultsDiv').hide();
-
-classDict = []
+var classDict = []
 classDict["cs50"] = {name:"Computer Science 50", description:"Rip phonebooks and other cool things to do with computer science."}
 classDict["cs61"] = {name:"Computer Science 61", description:"The coolest class you will ever take at Harvard University. Period."}
 classDict["stat110"] = {name:"Statistics 110", description:"lolwut, why am I taking a stats course if I'm a CS concentrator?"}
-
 $('#sidenavbar li').click(function(e) {
       $('#navigationDivs').show();
       $('#searchResults').hide();
@@ -32,18 +30,25 @@ $('#submitSearch').click(function(e) {
     var self = $(this);
 
     var searchResultsDiv = $('#searchResultsDiv');
+    searchResultsDiv.html('');
     
     var html = "";
+    var findButton = '<a href="#createGroupModal" role="button" class="btn btn-primary btn-large" data-toggle="modal"<h2>Find study group!</h2></a>';
+    var createButton = '<a href="#createGroupModal" style="position:relative;left:20px" role="button" class="btn btn-primary btn-large" data-toggle="modal"<h2>Create study group!</h2></a>';
 
-    for (var key in classDict) {
-        if (classDict[key] ==
-        $('#populateSearchResults').html("5");
+    var buttons = findButton+createButton;
+
+    searchText = $('#searchText').val();
+
+    if (classDict[searchText]) {
+        html="<div><h2>"+classDict[searchText].name+"</h2><h3>"+classDict[searchText].description+"</h3>"+buttons+"</div>";
     }
+
+    searchResultsDiv.append(html);
 
     currentDiv.hide();
     searchResultsDiv.show();
     currentDiv = searchResultsDiv;
-
 
 });
 
