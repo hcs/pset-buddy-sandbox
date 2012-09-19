@@ -2,7 +2,22 @@ var currentDiv = $('#searchDiv');
 $('#findGroupDiv').hide();
 $('#createGroupDiv').hide();
 $('#searchResultsDiv').hide();
-var classDict = []
+$('#myStudyGroupsDiv').hide();
+$('#helpDiv').hide();
+
+$('#submitCreateGroup').click(function(e) {
+    alert("wtf");
+    email = $('#email').val();  
+    name = $('#fullname').val();  
+    date = $('#date').val();  
+    time = $('#time').val();  
+    myClasses.push({email: email, name: name, date: date, time: time});
+    $('#createGroupModal').modal('toggle');
+
+});
+
+var myClasses = []; 
+var classDict = {};
 classDict["cs50"] = {name:"Computer Science 50", description:"Rip phonebooks and other cool things to do with computer science."}
 classDict["cs61"] = {name:"Computer Science 61", description:"The coolest class you will ever take at Harvard University. Period."}
 classDict["stat110"] = {name:"Statistics 110", description:"lolwut, why am I taking a stats course if I'm a CS concentrator?"}
@@ -16,11 +31,18 @@ $('#sidenavbar li').click(function(e) {
       }
       self.siblings().removeClass('active');
 
+      if (self.attr('id') == "myStudyGroups"){
+        $('.myStudyGroups').html('5');
+      }
+
+
       divId = (self.attr('id') + "Div");
       div = $("#"+divId);
 
+
       currentDiv.slideRightHide();
       div.slideLeftShow();
+
 
       currentDiv = div;
       e.preventDefault();
@@ -74,3 +96,4 @@ jQuery.fn.extend({
     });
   }
 });
+
